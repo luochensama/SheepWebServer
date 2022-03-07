@@ -11,6 +11,7 @@ class EventLoop;
 class EventLoopThread : noncopyable{
 public:
     EventLoopThread();
+    ~EventLoopThread();
     EventLoop* startThread();
 
 private:

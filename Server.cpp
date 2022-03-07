@@ -10,6 +10,7 @@
 Server::Server(EventLoop* loop,int threadNum,int port)
  :  loop_(loop),
     threadNum_(threadNum),
+    threadPool_(new EventLoopThreadPool(loop_,threadNum)),
     port_(port),
     started_(false),
     listenFd_(socket_bind_listen(port_)),
@@ -19,6 +20,7 @@ Server::Server(EventLoop* loop,int threadNum,int port)
 
 void Server::start() {
     assert(started_==false);
+    threadPool_->start();
     acceptChannel_->enableReading();
     started_ = true;
 }
@@ -32,6 +34,7 @@ void Server::handleRead() {
         }
         setTcpNoDelay(fd);
 
-
+        EventLoop* loop = threadPool_->getNextLoop();
+//        loop->runInLoop();
     }
 }

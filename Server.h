@@ -5,6 +5,7 @@
 
 #include "base/noncopyable.h"
 #include "EventLoop.h"
+#include "EventLoopThreadPool.h"
 
 class Server : noncopyable{
 public:
@@ -16,6 +17,7 @@ public:
 private:
 
     EventLoop* loop_;
+    EventLoopThreadPool* threadPool_;
     bool started_;
     int port_;
     int threadNum_;
