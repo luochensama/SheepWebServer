@@ -9,6 +9,7 @@
 #include "sys/epoll.h"
 
 class EventLoop;
+class HttpContext;
 class Channel : noncopyable{
 public:
     typedef std::function<void()> CallBack;
@@ -29,6 +30,8 @@ public:
     void enableWriting();
     void disableReading();
     void disableWriting();
+    std::shared_ptr<HttpContext> getHolder(){return context_.lock();};
+    void setHolder(std::shared_ptr<HttpContext> context) {context_ = context;};
 
     void handleEvents();
 
@@ -37,6 +40,7 @@ private:
     CallBack writeCallBack_;
     CallBack errorCallBack_;
     EventLoop* loop_;
+    std::weak_ptr<HttpContext> context_;
     uint32_t events_;
     uint32_t revents_;
     int lastEvents_;

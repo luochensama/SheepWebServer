@@ -52,7 +52,11 @@ int acceptNewConnection(int listenFd){
     memset(&client_addr,0,sizeof client_addr);
     socklen_t client_len = sizeof client_addr;
     int fd;
-    fd =accept4(listenFd,reinterpret_cast<sockaddr*>(&client_addr),&client_len,SOCK_NONBLOCK | SOCK_CLOEXEC);
+    fd = accept4(listenFd,reinterpret_cast<sockaddr*>(&client_addr),&client_len,SOCK_NONBLOCK | SOCK_CLOEXEC);
 
     return fd;
+}
+
+int64_t transTime(const struct timeval& t){
+    return static_cast<int64_t>(t.tv_usec) + static_cast<int64_t>(t.tv_sec%100003)*static_cast<int64_t>(1000000);
 }

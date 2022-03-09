@@ -48,6 +48,7 @@ void EventLoop::loop() {
             x->handleEvents();
         }
         doFunctors();
+        poll_->handleExpiredEvents();
     }
 
     LOG << "EventLoop" << this << "stop looping";
@@ -69,7 +70,9 @@ void EventLoop::quit() {
 void EventLoop::handleRead() {
     uint64_t one = 1;
     ssize_t n = read(wakeupFd_,reinterpret_cast<char*>(&one),sizeof one);
-    LOG << n;
+    if(n != sizeof one){
+        LOG << "EventLoop::handleRead() write " << n << " bytes instead of 8";
+    }
 }
 
 void EventLoop::queueInLoop(EventLoop::Functor&& cb) {
@@ -98,6 +101,8 @@ void EventLoop::doFunctors(){
 void EventLoop::wakeup() {
     uint64_t one = 1;
     ssize_t n = write(wakeupFd_,reinterpret_cast<char*>(&one),sizeof one);
-    LOG << n;
+    if(n != sizeof one){
+        LOG << "EventLoop::wakeup() write " << n << " bytes instead of 8";
+    }
 }
 

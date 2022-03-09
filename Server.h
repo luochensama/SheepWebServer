@@ -22,5 +22,6 @@ private:
     int port_;
     int threadNum_;
     int listenFd_;
+    int fakeFd_; // 用来解决fd耗光的情况。
     Channel* acceptChannel_;
 };

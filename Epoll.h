@@ -6,6 +6,7 @@
 #include "Channel.h"
 #include "vector"
 #include "unordered_map"
+#include "Timer.h"
 #include "sys/epoll.h"
 
 class Epoll : noncopyable{
@@ -16,13 +17,18 @@ public:
     void epoll_mod(Channel* request,int timeout);
     void epoll_del(Channel* request);
     void updateChannel(Channel* request,int timeout);
-    static int getMAXFDS(){return MAXFDS;};
     std::vector<Channel*> poll();
     std::vector<Channel*> getActiveEvents(int eventNums);
+    void handleExpiredEvents(){timer_.handleExpiredEvent();};
+    static int getMaxFds(){return MaxFds;};
 
 private:
-    static const int MAXFDS = 100000;
+    static const int MaxFds = 100000;
     int epollFd_;
     std::vector<epoll_event> events_;
-    Channel* channels_[MAXFDS];
+    Channel* channels_[MaxFds];
+    SP_HttpContext httpContexts_[MaxFds];
+    TimerManager timer_;
+
+    void add_timer(Channel* request,int timeout);
 };

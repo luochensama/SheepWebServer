@@ -8,7 +8,7 @@
 const int EVENTSUM = 4096;
 const int EPOLLWAIT_TIME = 10000;
 
-Epoll::Epoll() :epollFd_(epoll_create1(EPOLL_CLOEXEC)),events_(EVENTSUM){
+Epoll::Epoll() :epollFd_(epoll_create1(EPOLL_CLOEXEC)),events_(EVENTSUM), timer_(){
     assert(epollFd_>0);
 }
 
@@ -17,7 +17,8 @@ Epoll::~Epoll() {}
 void Epoll::epoll_add(Channel* request, int timeout) {
     int fd = request->getFd();
     if(timeout > 0){
-
+        add_timer(request,timeout);
+        httpContexts_[fd] = request->getHolder();
     }
     struct epoll_event event;
     event.data.fd = fd;
@@ -32,9 +33,8 @@ void Epoll::epoll_add(Channel* request, int timeout) {
 void Epoll::epoll_mod(Channel* request, int timeout) {
     int fd = request->getFd();
     if(timeout > 0){
-
+        add_timer(request,timeout);
     }
-
     struct epoll_event event;
     event.data.fd = fd;
     event.events = request->getEvents();
@@ -42,12 +42,10 @@ void Epoll::epoll_mod(Channel* request, int timeout) {
         perror("epoll_mod error");
         channels_[fd]= nullptr;
     }
-
 }
 
 void Epoll::epoll_del(Channel* request) {
     int fd = request->getFd();
-
     struct epoll_event event;
     event.data.fd = fd;
     event.events = request->getEvents();
@@ -55,6 +53,7 @@ void Epoll::epoll_del(Channel* request) {
         perror("epoll_del error");
     }
     channels_[fd]= nullptr;
+    httpContexts_[fd].reset();
 }
 
 std::vector<Channel*> Epoll::poll() {
@@ -86,3 +85,13 @@ void Epoll::updateChannel(Channel* request,int timeout) {
     if(channels_[request->getFd()] == nullptr) epoll_add(request, timeout);
     else epoll_mod(request, timeout);
 }
+
+void Epoll::add_timer(Channel *request, int timeout) {
+    auto rq = request->getHolder();
+    if(!rq){
+        LOG << "add timer failed";
+    } else{
+        timer_.addTimer(rq,timeout);
+    }
+}
+
