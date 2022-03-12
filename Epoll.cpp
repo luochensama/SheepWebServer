@@ -3,6 +3,7 @@
 //
 
 #include <cassert>
+#include <iostream>
 #include "Epoll.h"
 #include "base/Logging.h"
 const int EVENTSUM = 4096;
@@ -25,8 +26,9 @@ void Epoll::epoll_add(Channel* request, int timeout) {
     event.events = request->getEvents();
     channels_[fd] = request;
     if(epoll_ctl(epollFd_,EPOLL_CTL_ADD,fd, &event) < 0){
+        LOG << epollFd_;
         perror("epoll_add error");
-        channels_[fd]= nullptr;
+        channels_[fd] = nullptr;
     }
 }
 
@@ -41,6 +43,7 @@ void Epoll::epoll_mod(Channel* request, int timeout) {
     if(epoll_ctl(epollFd_,EPOLL_CTL_MOD,fd,&event) < 0){
         perror("epoll_mod error");
         channels_[fd]= nullptr;
+        httpContexts_[fd].reset();
     }
 }
 
@@ -52,7 +55,7 @@ void Epoll::epoll_del(Channel* request) {
     if(epoll_ctl(epollFd_,EPOLL_CTL_DEL,fd,&event) < 0){
         perror("epoll_del error");
     }
-    channels_[fd]= nullptr;
+    channels_[fd] = nullptr;
     httpContexts_[fd].reset();
 }
 
@@ -93,5 +96,9 @@ void Epoll::add_timer(Channel *request, int timeout) {
     } else{
         timer_.addTimer(rq,timeout);
     }
+}
+
+void Epoll::removeChannel(Channel* channel) {
+    epoll_del(channel);
 }
 

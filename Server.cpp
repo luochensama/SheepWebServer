@@ -19,12 +19,14 @@ Server::Server(EventLoop* loop,int threadNum,int port)
     fakeFd_(::open("/dev/null",O_RDONLY | O_CLOEXEC)),
     acceptChannel_(new Channel(loop_,listenFd_)){
         acceptChannel_->setReadCallBack(std::bind(&Server::handleRead,this));
+        acceptChannel_->setConnCallBack(std::bind(&Server::handleConn,this));
     }
 
 void Server::start() {
     assert(started_==false);
     threadPool_->start();
-    acceptChannel_->enableReading();
+    acceptChannel_->setEvents(EPOLLIN | EPOLLET);
+    loop_->updateChannel(acceptChannel_);
     started_ = true;
 }
 
@@ -50,7 +52,7 @@ void Server::handleRead() {
         }
         setTcpNoDelay(fd);
         EventLoop* loop = threadPool_->getNextLoop();
-
+        LOG << fd;
         std::shared_ptr<HttpContext> newConnection(new HttpContext(loop,fd));
         newConnection->getChannel()->setHolder(newConnection);
         loop->runInLoop(std::bind(&HttpContext::newConnection,newConnection));

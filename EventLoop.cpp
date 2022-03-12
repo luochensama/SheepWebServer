@@ -34,7 +34,8 @@ pendingFunctors(){
         t_loopInThisThread = this;
     }
     wakeupChannel_->setReadCallBack(std::bind(&EventLoop::handleRead,this));
-    wakeupChannel_->enableReading();
+    wakeupChannel_->setEvents(EPOLLIN);
+    updateChannel(wakeupChannel_.get());
 }
 
 void EventLoop::loop() {
@@ -104,5 +105,9 @@ void EventLoop::wakeup() {
     if(n != sizeof one){
         LOG << "EventLoop::wakeup() write " << n << " bytes instead of 8";
     }
+}
+
+void EventLoop::removeChannel(Channel *channel) {
+    poll_->removeChannel(channel);
 }
 

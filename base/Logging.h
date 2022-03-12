@@ -2,13 +2,13 @@
 // Created by luochensama on 2022/3/6.
 //
 #include "LogStream.h"
-
+#pragma once
 class Logger {
 public:
     Logger(const char*,int);
     ~Logger();
     LogStream& stream(){return impl_.stream_;};
-    void setFileName(const std::string& name){filename_ = name;};
+    static void setFileName(const std::string& name){filename_ = name;};
     static std::string getFileName(){return filename_;};
 
 private:

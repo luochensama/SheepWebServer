@@ -4,6 +4,7 @@
 
 #include "Channel.h"
 #include "EventLoop.h"
+#include "base/Logging.h"
 
 void Channel::handleRead() {
     if(readCallBack_) readCallBack_();
@@ -15,6 +16,10 @@ void Channel::handleWrite() {
 
 void Channel::handleError() {
     if(errorCallBack_) errorCallBack_();
+}
+
+void Channel::handleConn() {
+    if(connCallBack_) connCallBack_();
 }
 
 void Channel::handleEvents() {
@@ -31,29 +36,10 @@ void Channel::handleEvents() {
     if(revents_ & EPOLLOUT){
         handleWrite();
     }
+    handleConn();
 }
 
 Channel::Channel(EventLoop* loop,int fd)
     : loop_(loop), fd_(fd),events_(0), lastEvents_(0), revents_(0){
 
-}
-
-void Channel::enableReading() {
-    events_ |= (EPOLLIN | EPOLLPRI | EPOLLET);
-    loop_->updateChannel(this);
-}
-
-void Channel::enableWriting() {
-    events_ |= EPOLLOUT;
-    loop_->updateChannel(this);
-}
-
-void Channel::disableReading() {
-    events_ &= ~(EPOLLIN | EPOLLPRI | EPOLLET);
-    loop_->updateChannel(this);
-}
-
-void Channel::disableWriting() {
-    events_ &= ~EPOLLOUT;
-    loop_->updateChannel(this);
 }

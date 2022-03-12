@@ -18,18 +18,16 @@ public:
     void setReadCallBack(const CallBack& cb){readCallBack_ = cb;};
     void setWriteCallBack(const CallBack& cb){writeCallBack_ = cb;};
     void setErrorCallBack(const CallBack& cb){errorCallBack_ = cb;};
+    void setConnCallBack(const CallBack& cb){connCallBack_ = cb;};
     void handleRead();
     void handleWrite();
     void handleError();
+    void handleConn();
     int getFd() const{return fd_;};
-    uint32_t getEvents() const{return events_;};
+    uint32_t& getEvents() {return events_;};
     uint32_t getRevents() const{return revents_;};
     void setRevents(uint32_t rev){ revents_ = rev;};
     void setEvents(uint32_t events){ events_ = events;};
-    void enableReading();
-    void enableWriting();
-    void disableReading();
-    void disableWriting();
     std::shared_ptr<HttpContext> getHolder(){return context_.lock();};
     void setHolder(std::shared_ptr<HttpContext> context) {context_ = context;};
 
@@ -39,6 +37,7 @@ private:
     CallBack readCallBack_;
     CallBack writeCallBack_;
     CallBack errorCallBack_;
+    CallBack connCallBack_;
     EventLoop* loop_;
     std::weak_ptr<HttpContext> context_;
     uint32_t events_;

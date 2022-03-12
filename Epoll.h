@@ -21,6 +21,7 @@ public:
     std::vector<Channel*> getActiveEvents(int eventNums);
     void handleExpiredEvents(){timer_.handleExpiredEvent();};
     static int getMaxFds(){return MaxFds;};
+    void removeChannel(Channel* channel);
 
 private:
     static const int MaxFds = 100000;

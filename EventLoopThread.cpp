@@ -5,10 +5,10 @@
 #include <cassert>
 #include "EventLoop.h"
 #include "EventLoopThread.h"
+#include "base/Logging.h"
 
 EventLoopThread::EventLoopThread()
  : loop_(nullptr), mutex_(), cond_(mutex_), thread_(std::bind(&EventLoopThread::threadFunc,this),"EventLoopThread"){
-
 }
 EventLoopThread::~EventLoopThread() {
     if(loop_ != nullptr){

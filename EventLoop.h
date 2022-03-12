@@ -6,6 +6,7 @@
 #include <csignal>
 #include <cassert>
 #include <utility>
+#include <iostream>
 #include "base/noncopyable.h"
 #include "base/Thread.h"
 #include "base/CurrentThread.h"
@@ -27,6 +28,7 @@ public:
     void updateChannel(Channel* channel,int timeout = 0){
         poll_->updateChannel(channel,timeout);
     }
+    void removeChannel(Channel* channel);
     void handleRead();
     void runInLoop(Functor&& cb){
         if(isInLoopThread())
