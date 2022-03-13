@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="TinyWebServer"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\WebServer\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/luochensama/TinyWebServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/luochensama/TinyWebServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/luochensama/TinyWebServer/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="webserver">
+				<Option output="/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/webserver" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/luochensama/TinyWebServer/cmake-build-debug/WebServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 webserver"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="webserver/fast">
+				<Option output="/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/webserver" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/luochensama/TinyWebServer/cmake-build-debug/WebServer"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 webserver/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Channel.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Channel.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Epoll.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Epoll.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoop.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoop.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoopThread.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoopThread.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoopThreadPool.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/EventLoopThreadPool.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/HttpContext.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/HttpContext.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Server.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Server.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Timer.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Timer.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Util.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/Util.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/AsyncLogging.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/AsyncLogging.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Condition.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/CountDownLatch.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/CountDownLatch.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/CurrentThread.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/FileUtil.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/FileUtil.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/LogFile.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/LogFile.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/LogStream.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/LogStream.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Logging.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Logging.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Mutex.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Thread.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/Thread.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/base/noncopyable.h">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/main.cpp">
+			<Option target="webserver"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/luochensama/TinyWebServer/WebServer/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\WebServer\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
