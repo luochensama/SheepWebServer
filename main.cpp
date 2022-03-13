@@ -11,7 +11,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     int threadNum = 4;
-    int port = 12333;
+    int port = 12335;
     EventLoop mainLoop;
     Server myHTTPServer(&mainLoop, threadNum, port);
     myHTTPServer.start();

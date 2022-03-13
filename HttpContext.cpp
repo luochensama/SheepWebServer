@@ -8,6 +8,9 @@
 #include "Channel.h"
 #include "HttpContext.h"
 #include "EventLoop.h"
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <sys/stat.h>
 #include "Timer.h"
 #include "Util.h"
 #include "string"
@@ -131,9 +134,18 @@ HttpContext::HttpContext(EventLoop *loop, int fd)
 HttpContext::~HttpContext() {
     ::close(channel_->getFd());
 }
+void HttpContext::reset() {
+    fileName_.clear();
+    currentPosition_ = 0;
+    lineEndPos_ = 0;
+    header_.clear();
+    processState_ = STATE_PARSE_URI;
+    parseHeaderState_ = HEADER_LINE_READ;
+}
+
 void HttpContext::newConnection() {
     channel_->setEvents(EPOLLIN | EPOLLET);
-    loop_->updateChannel(channel_.get(),DEFAULT_EXPIRED_TIME);
+    loop_->addChannel(channel_,DEFAULT_EXPIRED_TIME);
 }
 
 void HttpContext::handleRead() {
@@ -156,7 +168,6 @@ void HttpContext::handleRead() {
     }
     if(processState_ == STATE_PARSE_URI){
         UriState res = parseURI();
-        LOG << "UriState "<<res;
         if(res == PARSE_URI_AGAIN){
             return;
         }else if(res == PARSE_URI_ERROR){
@@ -170,7 +181,6 @@ void HttpContext::handleRead() {
     }
     if(processState_ == STATE_PARSE_HEADER){
         HeaderState res = parseHeader();
-        LOG << "HeaderState "<<res;
         if(res == PARSE_HEADER_AGAIN){
             return;
         }else if(res == PARSE_HEADER_ERROR){
@@ -197,16 +207,21 @@ void HttpContext::handleRead() {
     }
     if(processState_ == STATE_ANALYSIS){
         AnalysisState analysisState = analysisRequest();
-        LOG << "AnalysisState "<< analysisState;
         if(analysisState == ANALYSIS_SUCCESS){
             processState_ = STATE_FINISH;
         }else{
-
+            return;
         }
     }
     if(processState_ == STATE_FINISH){
         if(!outputBuffer_.empty())
             handleWrite();
+        if(!error_){
+            reset();
+            if(!inputBuffer_.empty()){
+                handleRead();
+            }
+        }
     }
     if(error_) return; // write error
     uint32_t& events = channel_->getEvents();
@@ -250,12 +265,11 @@ void HttpContext::handleError(int errornum,std::string short_msg) {
 
 void HttpContext::handleClose() {
     connectionState_ = CONNECTION_DISCONNECTED;
-    std::shared_ptr<HttpContext> guard = shared_from_this();
-    loop_->removeChannel(channel_.get());
+    std::shared_ptr<HttpContext> guard(shared_from_this());
+    loop_->removeChannel(channel_);
 }
 
 void HttpContext::handleConn() {
-    LOG << "ConnectionState " << connectionState_;
     deleteTimer();
     if(error_ || connectionState_ == CONNECTION_DISCONNECTED) return;
     uint32_t events = channel_->getEvents();
@@ -276,7 +290,7 @@ void HttpContext::handleConn() {
         }else if(events == 0) events |= EPOLLIN;
     }
     events |= EPOLLET;
-    loop_->updateChannel(channel_.get(),timeout);
+    loop_->modChannel(channel_,timeout);
 }
 UriState HttpContext::parseURI() {
     // 攒够一行数据再解析
@@ -388,6 +402,41 @@ AnalysisState HttpContext::analysisRequest() {
 
             return ANALYSIS_SUCCESS;
         }
+
+        struct stat sbuf;
+        if (stat(fileName_.c_str(), &sbuf) < 0) {
+            header.clear();
+            handleError(fd_, "404 Not Found!");
+            return ANALYSIS_ERROR;
+        }
+        header += "Content-Type: " + filetype + "\r\n";
+        header += "Content-Length: " + std::to_string(sbuf.st_size) + "\r\n";
+        header += "Server: LinYa's Web Server\r\n";
+        // 头部结束
+        header += "\r\n";
+        outputBuffer_ += header;
+
+        if (methods_ == METHOD_HEAD) return ANALYSIS_SUCCESS;
+
+        int src_fd = open(fileName_.c_str(), O_RDONLY, 0);
+        if (src_fd < 0) {
+            outputBuffer_.clear();
+            handleError(fd_, "404 Not Found!");
+            return ANALYSIS_ERROR;
+        }
+        void *mmapRet = mmap(NULL, sbuf.st_size, PROT_READ, MAP_PRIVATE, src_fd, 0);
+        close(src_fd);
+        if (mmapRet == (void *)-1) {
+            munmap(mmapRet, sbuf.st_size);
+            outputBuffer_.clear();
+            handleError(fd_, "404 Not Found!");
+            return ANALYSIS_ERROR;
+        }
+        char *src_addr = static_cast<char *>(mmapRet);
+        outputBuffer_ += std::string(src_addr, src_addr + sbuf.st_size);
+        ;
+        munmap(mmapRet, sbuf.st_size);
+        return ANALYSIS_SUCCESS;
     }
 
     return ANALYSIS_ERROR;
@@ -415,10 +464,9 @@ bool HttpContext::receiveOneLine() {
 
 void HttpContext::deleteTimer() {
     if(timer_.lock()){
-        {
-            SP_Timer spTimer(timer_.lock());
-            spTimer->deleteTimer();
-        }
+        SP_Timer spTimer(timer_.lock());
+        spTimer->deleteTimer();
         timer_.reset();
     }
 }
+

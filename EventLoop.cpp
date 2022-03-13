@@ -35,7 +35,7 @@ pendingFunctors(){
     }
     wakeupChannel_->setReadCallBack(std::bind(&EventLoop::handleRead,this));
     wakeupChannel_->setEvents(EPOLLIN);
-    updateChannel(wakeupChannel_.get());
+    addChannel(wakeupChannel_);
 }
 
 void EventLoop::loop() {
@@ -45,9 +45,8 @@ void EventLoop::loop() {
     while(!quit_){
         activeChannel_.clear();
         activeChannel_ = poll_->poll();
-        for(auto x:activeChannel_){
+        for(auto x:activeChannel_)
             x->handleEvents();
-        }
         doFunctors();
         poll_->handleExpiredEvents();
     }
@@ -107,7 +106,4 @@ void EventLoop::wakeup() {
     }
 }
 
-void EventLoop::removeChannel(Channel *channel) {
-    poll_->removeChannel(channel);
-}
 

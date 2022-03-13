@@ -84,12 +84,10 @@ public:
     void handleError(int,std::string);
     void handleClose();
     void handleConn();
-    Channel* getChannel(){return channel_.get();};
+    std::shared_ptr<Channel> getChannel(){return channel_;};
     void newConnection();
     void setTimer(SP_Timer timer){timer_ = timer;};
-    void setIn(std::string s){
-        inputBuffer_ = s;
-    }
+    void reset();
     void deleteTimer();
     UriState parseURI();
     HeaderState parseHeader();
@@ -97,7 +95,7 @@ public:
 
 private:
     EventLoop* loop_;
-    std::unique_ptr<Channel> channel_; // 唯一所有权
+    std::shared_ptr<Channel> channel_; // 唯一所有权
     std::weak_ptr<TimerNode> timer_;
     int fd_;
     size_t currentPosition_; // 当前的位置

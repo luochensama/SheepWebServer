@@ -14,7 +14,7 @@ TimerNode::TimerNode(SP_HttpContext httpContext,int64_t timeout)
 : deleted_(false),expiredTime_(0),context_(httpContext){
     struct timeval t;
     gettimeofday(&t, nullptr);
-    expiredTime_ = transTime(t) + timeout; // 以微秒为单位
+    expiredTime_ = transTime(t) + timeout*1000; // 以微秒为单位
 
 }
 
@@ -52,7 +52,7 @@ void TimerManager::addTimer(SP_HttpContext httpContext,int64_t timeout) {
 
 void TimerManager::handleExpiredEvent() {
     while(!timerQueue_.empty()){
-        auto cur = timerQueue_.top();
+        std::shared_ptr<TimerNode> cur = timerQueue_.top();
         if(!cur->isValid())
             timerQueue_.pop();
         else break;

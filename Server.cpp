@@ -26,7 +26,7 @@ void Server::start() {
     assert(started_==false);
     threadPool_->start();
     acceptChannel_->setEvents(EPOLLIN | EPOLLET);
-    loop_->updateChannel(acceptChannel_);
+    loop_->addChannel(acceptChannel_);
     started_ = true;
 }
 
@@ -52,7 +52,6 @@ void Server::handleRead() {
         }
         setTcpNoDelay(fd);
         EventLoop* loop = threadPool_->getNextLoop();
-        LOG << fd;
         std::shared_ptr<HttpContext> newConnection(new HttpContext(loop,fd));
         newConnection->getChannel()->setHolder(newConnection);
         loop->runInLoop(std::bind(&HttpContext::newConnection,newConnection));
