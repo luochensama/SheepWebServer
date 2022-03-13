@@ -23,6 +23,7 @@ void Channel::handleConn() {
 }
 
 void Channel::handleEvents() {
+    events_ = 0;
     if((revents_ & EPOLLHUP) && !(revents_ & EPOLLIN)){
         return;
     }

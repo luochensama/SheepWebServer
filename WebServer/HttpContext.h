@@ -84,7 +84,7 @@ public:
     void handleError(int,std::string);
     void handleClose();
     void handleConn();
-    std::shared_ptr<Channel> getChannel(){return channel_;};
+    Channel* getChannel(){return channel_.get();};
     void newConnection();
     void setTimer(SP_Timer timer){timer_ = timer;};
     void reset();
@@ -95,7 +95,7 @@ public:
 
 private:
     EventLoop* loop_;
-    std::shared_ptr<Channel> channel_; // 唯一所有权
+    std::shared_ptr<Channel> channel_;
     std::weak_ptr<TimerNode> timer_;
     int fd_;
     size_t currentPosition_; // 当前的位置

@@ -18,6 +18,7 @@ Server::Server(EventLoop* loop,int threadNum,int port)
     listenFd_(socket_bind_listen(port_)),
     fakeFd_(::open("/dev/null",O_RDONLY | O_CLOEXEC)),
     acceptChannel_(new Channel(loop_,listenFd_)){
+        handle_for_sigpipe();
         acceptChannel_->setReadCallBack(std::bind(&Server::handleRead,this));
         acceptChannel_->setConnCallBack(std::bind(&Server::handleConn,this));
     }
@@ -56,6 +57,7 @@ void Server::handleRead() {
         newConnection->getChannel()->setHolder(newConnection);
         loop->runInLoop(std::bind(&HttpContext::newConnection,newConnection));
     }
+    acceptChannel_->setEvents(EPOLLIN);
 }
 
 Server::~Server() {

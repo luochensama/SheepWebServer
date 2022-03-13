@@ -21,6 +21,7 @@ void Epoll::epoll_add(std::shared_ptr<Channel> request, int timeout) {
         add_timer(request,timeout);
         httpContexts_[fd] = request->getHolder();
     }
+    request->EqualAndUpdateLastEvents();
     struct epoll_event event;
     event.data.fd = fd;
     event.events = request->getEvents();
@@ -37,6 +38,7 @@ void Epoll::epoll_mod(std::shared_ptr<Channel> request, int timeout) {
     if(timeout > 0){
         add_timer(request,timeout);
     }
+    if(request->EqualAndUpdateLastEvents()) return;
     struct epoll_event event;
     event.data.fd = fd;
     event.events = request->getEvents();
@@ -51,7 +53,7 @@ void Epoll::epoll_del(std::shared_ptr<Channel> request) {
     int fd = request->getFd();
     struct epoll_event event;
     event.data.fd = fd;
-    event.events = request->getEvents();
+    event.events = request->getLastEvents();
     if(epoll_ctl(epollFd_,EPOLL_CTL_DEL,fd,&event) < 0){
         perror("epoll_del error");
     }

@@ -8,6 +8,9 @@
 #include <cstring>
 #include <iostream>
 #include "unistd.h"
+#include <arpa/inet.h>
+#include <csignal>
+
 #include "Epoll.h"
 #include "netinet/tcp.h"
 #include "base/Logging.h"
@@ -53,6 +56,8 @@ int acceptNewConnection(int listenFd){
     struct sockaddr_in client_addr;
     memset(&client_addr,0,sizeof client_addr);
     socklen_t client_len = sizeof client_addr;
+    LOG << "New connection from " << inet_ntoa(client_addr.sin_addr) << ":"
+        << ntohs(client_addr.sin_port);
     int fd;
     fd = accept4(listenFd,reinterpret_cast<sockaddr*>(&client_addr),&client_len,SOCK_NONBLOCK | SOCK_CLOEXEC);
 
@@ -87,7 +92,13 @@ ssize_t readSocket(int fd,std::string& buffer,bool &zero){
     }
     return total;
 }
-
+void handle_for_sigpipe() {
+    struct sigaction sa;
+    memset(&sa, '\0', sizeof(sa));
+    sa.sa_handler = SIG_IGN;
+    sa.sa_flags = 0;
+    if (sigaction(SIGPIPE, &sa, NULL)) return;
+}
 ssize_t writeSocket(int fd,std::string& buffer){
     ssize_t total = buffer.size();
     ssize_t writen = 0;
@@ -99,7 +110,6 @@ ssize_t writeSocket(int fd,std::string& buffer){
             if(errno == EINTR) continue; // 中断
             else if(errno == EAGAIN) break;
             else{
-                perror("write socket error!");
                 return -1;
             }
         }else if(now == 0){

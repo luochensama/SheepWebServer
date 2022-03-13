@@ -5,6 +5,7 @@
 #include <sys/time.h>
 
 #include <memory>
+#include <iostream>
 #include "Timer.h"
 #include "HttpContext.h"
 #include "Util.h"
@@ -28,8 +29,8 @@ void TimerNode::setDelete() {
 }
 
 void TimerNode::deleteTimer() {
-    setDelete();
     context_.reset();
+    setDelete();
 }
 
 bool TimerNode::isValid() {

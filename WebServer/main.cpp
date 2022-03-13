@@ -10,8 +10,8 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    int threadNum = 4;
-    int port = 12335;
+    int threadNum = 5;
+    int port = 12336;
     EventLoop mainLoop;
     Server myHTTPServer(&mainLoop, threadNum, port);
     myHTTPServer.start();

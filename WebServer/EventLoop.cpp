@@ -19,17 +19,17 @@ int createEventFd(){
 }
 
 EventLoop::EventLoop() :
-looping_(false),
-threadId_(CurrentThread::tid()),
-poll_(new Epoll()),
-quit_(false),
-activeChannel_(),
-callingFunctors_(false),
-wakeupFd_(createEventFd()),
-wakeupChannel_(new Channel(this,wakeupFd_)),
-pendingFunctors(){
+        looping_(false),
+        threadId_(CurrentThread::tid()),
+        poll_(new Epoll()),
+        quit_(false),
+        activeChannel_(),
+        callingFunctors_(false),
+        wakeupFd_(createEventFd()),
+        wakeupChannel_(new Channel(this,wakeupFd_)),
+        pendingFunctors(){
     if(t_loopInThisThread != nullptr){
-    //    LOG << "Another EventLoop" << t_loopInThisThread << " in thread " << threadId_;
+        //    LOG << "Another EventLoop" << t_loopInThisThread << " in thread " << threadId_;
     }else{
         t_loopInThisThread = this;
     }

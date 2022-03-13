@@ -23,6 +23,12 @@ public:
     void handleWrite();
     void handleError();
     void handleConn();
+    bool EqualAndUpdateLastEvents() {
+        bool ret = (lastEvents_ == events_);
+        lastEvents_ = events_;
+        return ret;
+    }
+    uint32_t getLastEvents(){return lastEvents_;};
     int getFd() const{return fd_;};
     uint32_t& getEvents() {return events_;};
     uint32_t getRevents() const{return revents_;};
@@ -42,7 +48,7 @@ private:
     std::weak_ptr<HttpContext> context_;
     uint32_t events_;
     uint32_t revents_;
-    int lastEvents_;
+    uint32_t lastEvents_;
     int fd_;
 
 };

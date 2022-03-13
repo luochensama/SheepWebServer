@@ -13,3 +13,4 @@ void setTcpNoDelay(int fd);
 int64_t transTime(const struct timeval& t);
 ssize_t readSocket(int fd,std::string& buffer,bool &zero);
 ssize_t writeSocket(int fd,std::string& buffer);
+void handle_for_sigpipe();

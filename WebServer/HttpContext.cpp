@@ -112,7 +112,7 @@ std::string MimeType::getMime(const std::string &suffix) {
 }
 
 HttpContext::HttpContext(EventLoop *loop, int fd)
-:
+        :
         loop_(loop),
         channel_(new Channel(loop,fd)),
         timer_(),
@@ -132,7 +132,7 @@ HttpContext::HttpContext(EventLoop *loop, int fd)
     channel_->setConnCallBack(std::bind(&HttpContext::handleConn,this));
 }
 HttpContext::~HttpContext() {
-    ::close(channel_->getFd());
+    close(fd_);
 }
 void HttpContext::reset() {
     fileName_.clear();
@@ -161,10 +161,10 @@ void HttpContext::handleRead() {
         // 读到0认为对方已经关闭连接，这边处理完最后的数据也关闭.
         // 有可能对方会关闭自身读写两端，但服务器只会处理一次，因为如果收到RST
         // 会直接调用channel的errorCallback。
-       connectionState_ = CONNECTION_DISCONNECTING;
-       if(!readBytes){
-           return;
-       } // 如果读到0又没读到数据，那么就不继续下面的过程，直接return
+        connectionState_ = CONNECTION_DISCONNECTING;
+        if(!readBytes){
+            return;
+        } // 如果读到0又没读到数据，那么就不继续下面的过程，直接return
     }
     if(processState_ == STATE_PARSE_URI){
         UriState res = parseURI();
@@ -242,6 +242,7 @@ void HttpContext::handleWrite() {
 }
 
 void HttpContext::handleError(int errornum,std::string short_msg) {
+    error_ = true;
     short_msg = " " + short_msg;
     char send_buff[4096];
     std::string body_buff, header_buff;
@@ -258,9 +259,8 @@ void HttpContext::handleError(int errornum,std::string short_msg) {
 
     header_buff += "\r\n";
     // 错误处理不考虑writen不完的情况
-    writeSocket(fd_, header_buff);
+    if(writeSocket(fd_, header_buff) < 0) return;
     writeSocket(fd_, body_buff);
-    handleClose();
 }
 
 void HttpContext::handleClose() {
@@ -271,12 +271,17 @@ void HttpContext::handleClose() {
 
 void HttpContext::handleConn() {
     deleteTimer();
-    if(error_ || connectionState_ == CONNECTION_DISCONNECTED) return;
+    if(error_){
+        std::shared_ptr<HttpContext> guard(shared_from_this());
+        handleClose();
+        return;
+    }
     uint32_t events = channel_->getEvents();
     int timeout = DEFAULT_EXPIRED_TIME;
     if(keepAlive_) timeout = DEFAULT_KEEPALIVE_EXPIRED_TIME;
     if(connectionState_ == CONNECTION_DISCONNECTING){
         if(!(events & EPOLLOUT)) {
+            std::shared_ptr<HttpContext> guard(shared_from_this());
             handleClose();
             return;
         }else{
@@ -362,7 +367,6 @@ HeaderState HttpContext::parseHeader() {
             }
         }
     }
-
 
     return PARSE_HEADER_AGAIN;
 }
