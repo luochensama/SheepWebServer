@@ -35,26 +35,26 @@
 
   WebServer：
 
-  ![image-20220314155837936](/home/luochensama/.config/Typora/typora-user-images/image-20220314155837936.png)
+  ![image-20220314155837936](https://github.com/luochensama/TinyWebServer/blob/master/Pictures/WebServer_short.png)
 
   SheepWebServer：
 
-  ![image-20220314160018558](/home/luochensama/.config/Typora/typora-user-images/image-20220314160018558.png)
+  ![image-20220314160018558](https://github.com/luochensama/TinyWebServer/blob/master/Pictures/SheepWebServer_short.png)
 
 - 长连接
   WebServer：
 
-  ![image-20220314160121656](/home/luochensama/.config/Typora/typora-user-images/image-20220314160121656.png)
+  ![image-20220314160121656](https://github.com/luochensama/TinyWebServer/blob/master/Pictures/WebServer_long.png)
 
   SheepWebServer：
 
-  ![image-20220314160053487](/home/luochensama/.config/Typora/typora-user-images/image-20220314160053487.png)
+  ![image-20220314160053487](https://github.com/luochensama/TinyWebServer/blob/master/Pictures/SheepWebServer_long.png)
 
 
 
 ## 线程模型
 
-![from WebServer](file:///home/luochensama/TinyWebServer/Pictures/model.png)
+![from WebServer](https://github.com/luochensama/TinyWebServer/blob/master/Pictures/model.png)
 
 ## 待改进
 
