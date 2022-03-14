@@ -95,7 +95,7 @@ public:
 
 private:
     EventLoop* loop_;
-    std::shared_ptr<Channel> channel_;
+    std::unique_ptr<Channel> channel_;
     std::weak_ptr<TimerNode> timer_;
     int fd_;
     size_t currentPosition_; // 当前的位置

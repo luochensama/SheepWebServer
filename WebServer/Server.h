@@ -13,7 +13,7 @@ public:
     ~Server();
     void start();
     void handleRead();
-    void handleConn(){loop_->modChannel(acceptChannel_);};
+    void handleConn(){loop_->modChannel(acceptChannel_.get());};
 
 private:
 
@@ -24,5 +24,5 @@ private:
     int threadNum_;
     int listenFd_;
     int fakeFd_; // 用来解决fd耗光的情况。
-    std::shared_ptr<Channel> acceptChannel_;
+    std::unique_ptr<Channel> acceptChannel_;
 };

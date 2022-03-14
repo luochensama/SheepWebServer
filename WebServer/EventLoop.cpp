@@ -35,7 +35,7 @@ EventLoop::EventLoop() :
     }
     wakeupChannel_->setReadCallBack(std::bind(&EventLoop::handleRead,this));
     wakeupChannel_->setEvents(EPOLLIN);
-    addChannel(wakeupChannel_);
+    addChannel(wakeupChannel_.get());
 }
 
 void EventLoop::loop() {

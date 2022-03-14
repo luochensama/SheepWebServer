@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    int threadNum = 5;
+    int threadNum = 3;
     int port = 12336;
     EventLoop mainLoop;
     Server myHTTPServer(&mainLoop, threadNum, port);
@@ -18,4 +18,3 @@ int main(int argc, char *argv[]) {
     mainLoop.loop();
     return 0;
 }
-

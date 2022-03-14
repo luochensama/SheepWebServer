@@ -15,7 +15,7 @@ Epoll::Epoll() :epollFd_(epoll_create1(EPOLL_CLOEXEC)),events_(EVENTSUM), timer_
 
 Epoll::~Epoll() {}
 
-void Epoll::epoll_add(std::shared_ptr<Channel> request, int timeout) {
+void Epoll::epoll_add(Channel* request, int timeout) {
     int fd = request->getFd();
     if(timeout > 0){
         add_timer(request,timeout);
@@ -33,7 +33,7 @@ void Epoll::epoll_add(std::shared_ptr<Channel> request, int timeout) {
     }
 }
 
-void Epoll::epoll_mod(std::shared_ptr<Channel> request, int timeout) {
+void Epoll::epoll_mod(Channel* request, int timeout) {
     int fd = request->getFd();
     if(timeout > 0){
         add_timer(request,timeout);
@@ -49,7 +49,7 @@ void Epoll::epoll_mod(std::shared_ptr<Channel> request, int timeout) {
     }
 }
 
-void Epoll::epoll_del(std::shared_ptr<Channel> request) {
+void Epoll::epoll_del(Channel* request) {
     int fd = request->getFd();
     struct epoll_event event;
     event.data.fd = fd;
@@ -61,20 +61,20 @@ void Epoll::epoll_del(std::shared_ptr<Channel> request) {
     httpContexts_[fd].reset();
 }
 
-std::vector<std::shared_ptr<Channel>> Epoll::poll() {
+std::vector<Channel*> Epoll::poll() {
     while(true){
         int eventcount = epoll_wait(epollFd_,&*events_.begin(),events_.size(),EPOLLWAIT_TIME);
         if(eventcount < 0) perror("epoll_wait error");
-        std::vector<std::shared_ptr<Channel>> req_data = getActiveEvents(eventcount);
+        std::vector<Channel*> req_data = getActiveEvents(eventcount);
         if(!req_data.empty()) return req_data;
     }
 }
 
-std::vector<std::shared_ptr<Channel>> Epoll::getActiveEvents(int eventNums) {
-    std::vector<std::shared_ptr<Channel>> res;
+std::vector<Channel*> Epoll::getActiveEvents(int eventNums) {
+    std::vector<Channel*> res;
     for(int i = 0;i < eventNums;++ i){
         int fd = events_[i].data.fd;
-        std::shared_ptr<Channel> channel = channels_[fd];
+        Channel* channel = channels_[fd];
         if(channel) {
             channel->setRevents(events_[i].events);
             res.push_back(channel);
@@ -87,7 +87,7 @@ std::vector<std::shared_ptr<Channel>> Epoll::getActiveEvents(int eventNums) {
 }
 
 
-void Epoll::add_timer(std::shared_ptr<Channel> request, int timeout) {
+void Epoll::add_timer(Channel* request, int timeout) {
     auto rq = request->getHolder();
     if(!rq){
         LOG << "add timer failed";

@@ -25,13 +25,13 @@ public:
     }
     void loop();
     void quit();
-    void addChannel(std::shared_ptr<Channel> channel,int timeout = 0){
+    void addChannel(Channel* channel,int timeout = 0){
         poll_->epoll_add(channel,timeout);
     }
-    void modChannel(std::shared_ptr<Channel> channel,int timeout = 0){
+    void modChannel(Channel* channel,int timeout = 0){
         poll_->epoll_mod(channel,timeout);
     }
-    void removeChannel(std::shared_ptr<Channel> channel){
+    void removeChannel(Channel* channel){
         poll_->epoll_del(channel);
     }
     void handleRead();
@@ -47,11 +47,11 @@ public:
 
 private:
     int wakeupFd_;
-    std::shared_ptr<Channel> wakeupChannel_;
+    std::unique_ptr<Channel> wakeupChannel_;
     bool looping_;
     pid_t threadId_;
     std::unique_ptr<Epoll> poll_;
-    std::vector<std::shared_ptr<Channel>> activeChannel_;
+    std::vector<Channel*> activeChannel_;
     bool quit_;
     bool callingFunctors_;
     MutexLock mutex_;

@@ -13,11 +13,11 @@ class Epoll : noncopyable{
 public:
     Epoll();
     ~Epoll();
-    void epoll_add(std::shared_ptr<Channel> request,int timeout);
-    void epoll_mod(std::shared_ptr<Channel> request,int timeout);
-    void epoll_del(std::shared_ptr<Channel> request);
-    std::vector<std::shared_ptr<Channel>> poll();
-    std::vector<std::shared_ptr<Channel>> getActiveEvents(int eventNums);
+    void epoll_add(Channel* request,int timeout);
+    void epoll_mod(Channel* request,int timeout);
+    void epoll_del(Channel* request);
+    std::vector<Channel*> poll();
+    std::vector<Channel*> getActiveEvents(int eventNums);
     void handleExpiredEvents(){timer_.handleExpiredEvent();};
     static int getMaxFds(){return MaxFds;};
 
@@ -25,9 +25,9 @@ private:
     static const int MaxFds = 100000;
     int epollFd_;
     std::vector<epoll_event> events_;
-    std::shared_ptr<Channel> channels_[MaxFds];
+    Channel* channels_[MaxFds];
     SP_HttpContext httpContexts_[MaxFds];
     TimerManager timer_;
 
-    void add_timer(std::shared_ptr<Channel> request,int timeout);
+    void add_timer(Channel* request,int timeout);
 };

@@ -145,7 +145,7 @@ void HttpContext::reset() {
 
 void HttpContext::newConnection() {
     channel_->setEvents(EPOLLIN | EPOLLET);
-    loop_->addChannel(channel_,DEFAULT_EXPIRED_TIME);
+    loop_->addChannel(channel_.get(),DEFAULT_EXPIRED_TIME);
 }
 
 void HttpContext::handleRead() {
@@ -259,20 +259,28 @@ void HttpContext::handleError(int errornum,std::string short_msg) {
 
     header_buff += "\r\n";
     // 错误处理不考虑writen不完的情况
-    if(writeSocket(fd_, header_buff) < 0) return;
+    if(writeSocket(fd_, header_buff) < 0) {
+//        handleClose();
+        return;
+    }
     writeSocket(fd_, body_buff);
+//    handleClose();
 }
 
 void HttpContext::handleClose() {
     connectionState_ = CONNECTION_DISCONNECTED;
     std::shared_ptr<HttpContext> guard(shared_from_this());
-    loop_->removeChannel(channel_);
+    loop_->removeChannel(channel_.get());
 }
 
 void HttpContext::handleConn() {
+    /*if(error_ || connectionState_ == CONNECTION_DISCONNECTED){
+        std::shared_ptr<HttpContext> guard(shared_from_this()); // deleteTimer之后，HttpContext对象会被析构，所以需要guard一下
+        deleteTimer();
+        return;
+    }*/
     deleteTimer();
     if(error_){
-        std::shared_ptr<HttpContext> guard(shared_from_this());
         handleClose();
         return;
     }
@@ -281,7 +289,6 @@ void HttpContext::handleConn() {
     if(keepAlive_) timeout = DEFAULT_KEEPALIVE_EXPIRED_TIME;
     if(connectionState_ == CONNECTION_DISCONNECTING){
         if(!(events & EPOLLOUT)) {
-            std::shared_ptr<HttpContext> guard(shared_from_this());
             handleClose();
             return;
         }else{
@@ -295,7 +302,7 @@ void HttpContext::handleConn() {
         }else if(events == 0) events |= EPOLLIN;
     }
     events |= EPOLLET;
-    loop_->modChannel(channel_,timeout);
+    loop_->modChannel(channel_.get(),timeout);
 }
 UriState HttpContext::parseURI() {
     // 攒够一行数据再解析

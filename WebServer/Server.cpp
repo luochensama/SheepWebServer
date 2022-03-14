@@ -27,7 +27,7 @@ void Server::start() {
     assert(started_==false);
     threadPool_->start();
     acceptChannel_->setEvents(EPOLLIN | EPOLLET);
-    loop_->addChannel(acceptChannel_);
+    loop_->addChannel(acceptChannel_.get());
     started_ = true;
 }
 
