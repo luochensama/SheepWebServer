@@ -152,6 +152,7 @@ void HttpContext::handleRead() {
     if(error_ || connectionState_ != CONNECTION_CONNECTED) return;
     bool zero = false;
     ssize_t readBytes = readSocket(fd_,inputBuffer_,zero);
+    LOG << inputBuffer_;
     if(readBytes < 0){ // 如果读取错误返回400.
         error_ = true;
         handleError(400,"Bad Request"); // handleError会关闭连接。
@@ -180,7 +181,10 @@ void HttpContext::handleRead() {
         }
     }
     if(processState_ == STATE_PARSE_HEADER){
+        LOG << inputBuffer_ << "\n" << "--------------------------------------------------------------------------------\n" ;
         HeaderState res = parseHeader();
+        LOG << res;
+        LOG << inputBuffer_ << "\n" << "--------------------------------------------------------------------------------\n" ;
         if(res == PARSE_HEADER_AGAIN){
             return;
         }else if(res == PARSE_HEADER_ERROR){
@@ -349,7 +353,10 @@ UriState HttpContext::parseURI() {
 HeaderState HttpContext::parseHeader() {
     while(!inputBuffer_.empty()) {
         if (parseHeaderState_ == HEADER_LINE_READ) {
-            if (!receiveOneLine()) return PARSE_HEADER_AGAIN; // 没收到一行不处理
+            if (!receiveOneLine()){
+                LOG << 1 << " " << lineEndPos_;
+                return PARSE_HEADER_AGAIN;
+            } // 没收到一行不处理
             currentPosition_ = line_.find(':', currentPosition_);
             if (isNotFound(currentPosition_))
                 return PARSE_HEADER_ERROR;
@@ -367,6 +374,7 @@ HeaderState HttpContext::parseHeader() {
                     inputBuffer_ = inputBuffer_.substr(2);
                     return PARSE_HEADER_SUCCESS;
                 } else {
+                    lineEndPos_ = 0;
                     parseHeaderState_ = HEADER_LINE_READ;
                 }
             } else {
@@ -464,11 +472,13 @@ void HttpContext::removePre(size_t end) {
 }
 
 bool HttpContext::receiveOneLine() {
-    bool res = !isNotFound(lineEndPos_ = inputBuffer_.find('\r', lineEndPos_));
+    bool res = !isNotFound(lineEndPos_ = inputBuffer_.find('\n', lineEndPos_));
     if(res){
         currentPosition_ = 0;
         line_ = inputBuffer_.substr(0, lineEndPos_);
-        removePre(lineEndPos_ + 2);
+        removePre(lineEndPos_ + 1);
+    }else{
+        lineEndPos_ = inputBuffer_.size();
     }
     return res;
 }

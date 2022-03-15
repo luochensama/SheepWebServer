@@ -1,5 +1,0 @@
-/home/luochensama/SheepWebServer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/luochensama/SheepWebServer/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/luochensama/SheepWebServer/cmake-build-debug/WebServer/CMakeFiles/rebuild_cache.dir
-/home/luochensama/SheepWebServer/cmake-build-debug/WebServer/CMakeFiles/edit_cache.dir
-/home/luochensama/SheepWebServer/cmake-build-debug/WebServer/CMakeFiles/WebServer.dir
