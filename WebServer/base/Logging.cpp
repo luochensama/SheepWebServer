@@ -6,7 +6,7 @@
 #include "Logging.h"
 #include "AsyncLogging.h"
 
-std::string Logger::filename_ = "/home/luochensama/CLionProjects/webserver/base/WebServer.log";
+std::string Logger::filename_ = "./WebServer.log";
 static pthread_once_t once_control = PTHREAD_ONCE_INIT;
 static AsyncLogging* AsyncLogger;
 
@@ -14,6 +14,7 @@ void init_once(){
     AsyncLogger = new AsyncLogging(Logger::getFileName());
     AsyncLogger->start();
 }
+
 void output(const char* str,int len){
     pthread_once(&once_control,init_once);
     AsyncLogger->append(str,len);
@@ -38,7 +39,7 @@ void Logger::Impl::formatTime() {
 }
 
 Logger::Logger(const char *filename, int line) : impl_(filename,line){
-
+    impl_.formatTime();
 }
 
 Logger::~Logger() {

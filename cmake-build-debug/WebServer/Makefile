@@ -65,16 +65,6 @@ CMAKE_BINARY_DIR = /home/luochensama/SheepWebServer/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/luochensama/clion-2021.2.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -84,6 +74,16 @@ rebuild_cache:
 # Special rule for the target rebuild_cache
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/home/luochensama/clion-2021.2.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -117,25 +117,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-WebServer/CMakeFiles/webserver.dir/rule:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/webserver.dir/rule
-.PHONY : WebServer/CMakeFiles/webserver.dir/rule
+WebServer/CMakeFiles/WebServer.dir/rule:
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WebServer/CMakeFiles/WebServer.dir/rule
+.PHONY : WebServer/CMakeFiles/WebServer.dir/rule
 
 # Convenience name for target.
-webserver: WebServer/CMakeFiles/webserver.dir/rule
-.PHONY : webserver
+WebServer: WebServer/CMakeFiles/WebServer.dir/rule
+.PHONY : WebServer
 
 # fast build rule for target.
-webserver/fast:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/build
-.PHONY : webserver/fast
+WebServer/fast:
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/build
+.PHONY : WebServer/fast
 
 Channel.o: Channel.cpp.o
 .PHONY : Channel.o
 
 # target to build an object file
 Channel.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Channel.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Channel.cpp.o
 .PHONY : Channel.cpp.o
 
 Channel.i: Channel.cpp.i
@@ -143,7 +143,7 @@ Channel.i: Channel.cpp.i
 
 # target to preprocess a source file
 Channel.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Channel.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Channel.cpp.i
 .PHONY : Channel.cpp.i
 
 Channel.s: Channel.cpp.s
@@ -151,7 +151,7 @@ Channel.s: Channel.cpp.s
 
 # target to generate assembly for a file
 Channel.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Channel.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Channel.cpp.s
 .PHONY : Channel.cpp.s
 
 Epoll.o: Epoll.cpp.o
@@ -159,7 +159,7 @@ Epoll.o: Epoll.cpp.o
 
 # target to build an object file
 Epoll.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Epoll.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Epoll.cpp.o
 .PHONY : Epoll.cpp.o
 
 Epoll.i: Epoll.cpp.i
@@ -167,7 +167,7 @@ Epoll.i: Epoll.cpp.i
 
 # target to preprocess a source file
 Epoll.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Epoll.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Epoll.cpp.i
 .PHONY : Epoll.cpp.i
 
 Epoll.s: Epoll.cpp.s
@@ -175,7 +175,7 @@ Epoll.s: Epoll.cpp.s
 
 # target to generate assembly for a file
 Epoll.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Epoll.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Epoll.cpp.s
 .PHONY : Epoll.cpp.s
 
 EventLoop.o: EventLoop.cpp.o
@@ -183,7 +183,7 @@ EventLoop.o: EventLoop.cpp.o
 
 # target to build an object file
 EventLoop.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoop.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoop.cpp.o
 .PHONY : EventLoop.cpp.o
 
 EventLoop.i: EventLoop.cpp.i
@@ -191,7 +191,7 @@ EventLoop.i: EventLoop.cpp.i
 
 # target to preprocess a source file
 EventLoop.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoop.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoop.cpp.i
 .PHONY : EventLoop.cpp.i
 
 EventLoop.s: EventLoop.cpp.s
@@ -199,7 +199,7 @@ EventLoop.s: EventLoop.cpp.s
 
 # target to generate assembly for a file
 EventLoop.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoop.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoop.cpp.s
 .PHONY : EventLoop.cpp.s
 
 EventLoopThread.o: EventLoopThread.cpp.o
@@ -207,7 +207,7 @@ EventLoopThread.o: EventLoopThread.cpp.o
 
 # target to build an object file
 EventLoopThread.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThread.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThread.cpp.o
 .PHONY : EventLoopThread.cpp.o
 
 EventLoopThread.i: EventLoopThread.cpp.i
@@ -215,7 +215,7 @@ EventLoopThread.i: EventLoopThread.cpp.i
 
 # target to preprocess a source file
 EventLoopThread.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThread.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThread.cpp.i
 .PHONY : EventLoopThread.cpp.i
 
 EventLoopThread.s: EventLoopThread.cpp.s
@@ -223,7 +223,7 @@ EventLoopThread.s: EventLoopThread.cpp.s
 
 # target to generate assembly for a file
 EventLoopThread.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThread.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThread.cpp.s
 .PHONY : EventLoopThread.cpp.s
 
 EventLoopThreadPool.o: EventLoopThreadPool.cpp.o
@@ -231,7 +231,7 @@ EventLoopThreadPool.o: EventLoopThreadPool.cpp.o
 
 # target to build an object file
 EventLoopThreadPool.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThreadPool.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThreadPool.cpp.o
 .PHONY : EventLoopThreadPool.cpp.o
 
 EventLoopThreadPool.i: EventLoopThreadPool.cpp.i
@@ -239,7 +239,7 @@ EventLoopThreadPool.i: EventLoopThreadPool.cpp.i
 
 # target to preprocess a source file
 EventLoopThreadPool.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThreadPool.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThreadPool.cpp.i
 .PHONY : EventLoopThreadPool.cpp.i
 
 EventLoopThreadPool.s: EventLoopThreadPool.cpp.s
@@ -247,7 +247,7 @@ EventLoopThreadPool.s: EventLoopThreadPool.cpp.s
 
 # target to generate assembly for a file
 EventLoopThreadPool.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/EventLoopThreadPool.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/EventLoopThreadPool.cpp.s
 .PHONY : EventLoopThreadPool.cpp.s
 
 HttpContext.o: HttpContext.cpp.o
@@ -255,7 +255,7 @@ HttpContext.o: HttpContext.cpp.o
 
 # target to build an object file
 HttpContext.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/HttpContext.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/HttpContext.cpp.o
 .PHONY : HttpContext.cpp.o
 
 HttpContext.i: HttpContext.cpp.i
@@ -263,7 +263,7 @@ HttpContext.i: HttpContext.cpp.i
 
 # target to preprocess a source file
 HttpContext.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/HttpContext.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/HttpContext.cpp.i
 .PHONY : HttpContext.cpp.i
 
 HttpContext.s: HttpContext.cpp.s
@@ -271,7 +271,7 @@ HttpContext.s: HttpContext.cpp.s
 
 # target to generate assembly for a file
 HttpContext.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/HttpContext.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/HttpContext.cpp.s
 .PHONY : HttpContext.cpp.s
 
 Server.o: Server.cpp.o
@@ -279,7 +279,7 @@ Server.o: Server.cpp.o
 
 # target to build an object file
 Server.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Server.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Server.cpp.o
 .PHONY : Server.cpp.o
 
 Server.i: Server.cpp.i
@@ -287,7 +287,7 @@ Server.i: Server.cpp.i
 
 # target to preprocess a source file
 Server.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Server.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Server.cpp.i
 .PHONY : Server.cpp.i
 
 Server.s: Server.cpp.s
@@ -295,7 +295,7 @@ Server.s: Server.cpp.s
 
 # target to generate assembly for a file
 Server.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Server.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Server.cpp.s
 .PHONY : Server.cpp.s
 
 Timer.o: Timer.cpp.o
@@ -303,7 +303,7 @@ Timer.o: Timer.cpp.o
 
 # target to build an object file
 Timer.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Timer.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Timer.cpp.o
 .PHONY : Timer.cpp.o
 
 Timer.i: Timer.cpp.i
@@ -311,7 +311,7 @@ Timer.i: Timer.cpp.i
 
 # target to preprocess a source file
 Timer.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Timer.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Timer.cpp.i
 .PHONY : Timer.cpp.i
 
 Timer.s: Timer.cpp.s
@@ -319,7 +319,7 @@ Timer.s: Timer.cpp.s
 
 # target to generate assembly for a file
 Timer.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Timer.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Timer.cpp.s
 .PHONY : Timer.cpp.s
 
 Util.o: Util.cpp.o
@@ -327,7 +327,7 @@ Util.o: Util.cpp.o
 
 # target to build an object file
 Util.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Util.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Util.cpp.o
 .PHONY : Util.cpp.o
 
 Util.i: Util.cpp.i
@@ -335,7 +335,7 @@ Util.i: Util.cpp.i
 
 # target to preprocess a source file
 Util.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Util.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Util.cpp.i
 .PHONY : Util.cpp.i
 
 Util.s: Util.cpp.s
@@ -343,7 +343,7 @@ Util.s: Util.cpp.s
 
 # target to generate assembly for a file
 Util.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/Util.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/Util.cpp.s
 .PHONY : Util.cpp.s
 
 base/AsyncLogging.o: base/AsyncLogging.cpp.o
@@ -351,7 +351,7 @@ base/AsyncLogging.o: base/AsyncLogging.cpp.o
 
 # target to build an object file
 base/AsyncLogging.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/AsyncLogging.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/AsyncLogging.cpp.o
 .PHONY : base/AsyncLogging.cpp.o
 
 base/AsyncLogging.i: base/AsyncLogging.cpp.i
@@ -359,7 +359,7 @@ base/AsyncLogging.i: base/AsyncLogging.cpp.i
 
 # target to preprocess a source file
 base/AsyncLogging.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/AsyncLogging.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/AsyncLogging.cpp.i
 .PHONY : base/AsyncLogging.cpp.i
 
 base/AsyncLogging.s: base/AsyncLogging.cpp.s
@@ -367,7 +367,7 @@ base/AsyncLogging.s: base/AsyncLogging.cpp.s
 
 # target to generate assembly for a file
 base/AsyncLogging.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/AsyncLogging.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/AsyncLogging.cpp.s
 .PHONY : base/AsyncLogging.cpp.s
 
 base/CountDownLatch.o: base/CountDownLatch.cpp.o
@@ -375,7 +375,7 @@ base/CountDownLatch.o: base/CountDownLatch.cpp.o
 
 # target to build an object file
 base/CountDownLatch.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/CountDownLatch.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/CountDownLatch.cpp.o
 .PHONY : base/CountDownLatch.cpp.o
 
 base/CountDownLatch.i: base/CountDownLatch.cpp.i
@@ -383,7 +383,7 @@ base/CountDownLatch.i: base/CountDownLatch.cpp.i
 
 # target to preprocess a source file
 base/CountDownLatch.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/CountDownLatch.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/CountDownLatch.cpp.i
 .PHONY : base/CountDownLatch.cpp.i
 
 base/CountDownLatch.s: base/CountDownLatch.cpp.s
@@ -391,7 +391,7 @@ base/CountDownLatch.s: base/CountDownLatch.cpp.s
 
 # target to generate assembly for a file
 base/CountDownLatch.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/CountDownLatch.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/CountDownLatch.cpp.s
 .PHONY : base/CountDownLatch.cpp.s
 
 base/FileUtil.o: base/FileUtil.cpp.o
@@ -399,7 +399,7 @@ base/FileUtil.o: base/FileUtil.cpp.o
 
 # target to build an object file
 base/FileUtil.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/FileUtil.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/FileUtil.cpp.o
 .PHONY : base/FileUtil.cpp.o
 
 base/FileUtil.i: base/FileUtil.cpp.i
@@ -407,7 +407,7 @@ base/FileUtil.i: base/FileUtil.cpp.i
 
 # target to preprocess a source file
 base/FileUtil.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/FileUtil.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/FileUtil.cpp.i
 .PHONY : base/FileUtil.cpp.i
 
 base/FileUtil.s: base/FileUtil.cpp.s
@@ -415,7 +415,7 @@ base/FileUtil.s: base/FileUtil.cpp.s
 
 # target to generate assembly for a file
 base/FileUtil.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/FileUtil.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/FileUtil.cpp.s
 .PHONY : base/FileUtil.cpp.s
 
 base/LogFile.o: base/LogFile.cpp.o
@@ -423,7 +423,7 @@ base/LogFile.o: base/LogFile.cpp.o
 
 # target to build an object file
 base/LogFile.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogFile.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogFile.cpp.o
 .PHONY : base/LogFile.cpp.o
 
 base/LogFile.i: base/LogFile.cpp.i
@@ -431,7 +431,7 @@ base/LogFile.i: base/LogFile.cpp.i
 
 # target to preprocess a source file
 base/LogFile.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogFile.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogFile.cpp.i
 .PHONY : base/LogFile.cpp.i
 
 base/LogFile.s: base/LogFile.cpp.s
@@ -439,7 +439,7 @@ base/LogFile.s: base/LogFile.cpp.s
 
 # target to generate assembly for a file
 base/LogFile.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogFile.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogFile.cpp.s
 .PHONY : base/LogFile.cpp.s
 
 base/LogStream.o: base/LogStream.cpp.o
@@ -447,7 +447,7 @@ base/LogStream.o: base/LogStream.cpp.o
 
 # target to build an object file
 base/LogStream.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogStream.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogStream.cpp.o
 .PHONY : base/LogStream.cpp.o
 
 base/LogStream.i: base/LogStream.cpp.i
@@ -455,7 +455,7 @@ base/LogStream.i: base/LogStream.cpp.i
 
 # target to preprocess a source file
 base/LogStream.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogStream.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogStream.cpp.i
 .PHONY : base/LogStream.cpp.i
 
 base/LogStream.s: base/LogStream.cpp.s
@@ -463,7 +463,7 @@ base/LogStream.s: base/LogStream.cpp.s
 
 # target to generate assembly for a file
 base/LogStream.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/LogStream.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/LogStream.cpp.s
 .PHONY : base/LogStream.cpp.s
 
 base/Logging.o: base/Logging.cpp.o
@@ -471,7 +471,7 @@ base/Logging.o: base/Logging.cpp.o
 
 # target to build an object file
 base/Logging.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Logging.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Logging.cpp.o
 .PHONY : base/Logging.cpp.o
 
 base/Logging.i: base/Logging.cpp.i
@@ -479,7 +479,7 @@ base/Logging.i: base/Logging.cpp.i
 
 # target to preprocess a source file
 base/Logging.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Logging.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Logging.cpp.i
 .PHONY : base/Logging.cpp.i
 
 base/Logging.s: base/Logging.cpp.s
@@ -487,7 +487,7 @@ base/Logging.s: base/Logging.cpp.s
 
 # target to generate assembly for a file
 base/Logging.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Logging.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Logging.cpp.s
 .PHONY : base/Logging.cpp.s
 
 base/Thread.o: base/Thread.cpp.o
@@ -495,7 +495,7 @@ base/Thread.o: base/Thread.cpp.o
 
 # target to build an object file
 base/Thread.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Thread.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Thread.cpp.o
 .PHONY : base/Thread.cpp.o
 
 base/Thread.i: base/Thread.cpp.i
@@ -503,7 +503,7 @@ base/Thread.i: base/Thread.cpp.i
 
 # target to preprocess a source file
 base/Thread.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Thread.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Thread.cpp.i
 .PHONY : base/Thread.cpp.i
 
 base/Thread.s: base/Thread.cpp.s
@@ -511,7 +511,7 @@ base/Thread.s: base/Thread.cpp.s
 
 # target to generate assembly for a file
 base/Thread.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/base/Thread.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/base/Thread.cpp.s
 .PHONY : base/Thread.cpp.s
 
 main.o: main.cpp.o
@@ -519,7 +519,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/main.cpp.o
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -527,7 +527,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/main.cpp.i
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -535,7 +535,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/main.cpp.s
+	cd /home/luochensama/SheepWebServer/cmake-build-debug && $(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -546,7 +546,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... webserver"
+	@echo "... WebServer"
 	@echo "... Channel.o"
 	@echo "... Channel.i"
 	@echo "... Channel.s"

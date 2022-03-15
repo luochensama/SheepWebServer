@@ -230,16 +230,22 @@ ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
 
 //Value Computed by CMake
-SheepWebServer_BINARY_DIR:STATIC=/home/luochensama/SheepWebServer/cmake-build-debug
+SheepWebServer_BINARY_DIR:STATIC=/home/luochensama/SheepWebServer/cmake-build-debug/WebServer
 
 //Value Computed by CMake
-SheepWebServer_SOURCE_DIR:STATIC=/home/luochensama/SheepWebServer
+SheepWebServer_SOURCE_DIR:STATIC=/home/luochensama/SheepWebServer/WebServer
 
 //Value Computed by CMake
 TinyWebServer_BINARY_DIR:STATIC=/home/luochensama/SheepWebServer/cmake-build-debug
 
 //Value Computed by CMake
 TinyWebServer_SOURCE_DIR:STATIC=/home/luochensama/SheepWebServer
+
+//Value Computed by CMake
+WebServer_BINARY_DIR:STATIC=/home/luochensama/SheepWebServer/cmake-build-debug/WebServer
+
+//Value Computed by CMake
+WebServer_SOURCE_DIR:STATIC=/home/luochensama/SheepWebServer/WebServer
 
 //Value Computed by CMake
 webserver_BINARY_DIR:STATIC=/home/luochensama/SheepWebServer/cmake-build-debug/WebServer

@@ -117,17 +117,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named webserver
+# Target rules for targets named WebServer
 
 # Build rule for target.
-webserver: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 webserver
-.PHONY : webserver
+WebServer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WebServer
+.PHONY : WebServer
 
 # fast build rule for target.
-webserver/fast:
-	$(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/webserver.dir/build.make WebServer/CMakeFiles/webserver.dir/build
-.PHONY : webserver/fast
+WebServer/fast:
+	$(MAKE) $(MAKESILENT) -f WebServer/CMakeFiles/WebServer.dir/build.make WebServer/CMakeFiles/WebServer.dir/build
+.PHONY : WebServer/fast
 
 # Help Target
 help:
@@ -137,7 +137,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... webserver"
+	@echo "... WebServer"
 .PHONY : help
 
 
