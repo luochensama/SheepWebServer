@@ -152,7 +152,6 @@ void HttpContext::handleRead() {
     if(error_ || connectionState_ != CONNECTION_CONNECTED) return;
     bool zero = false;
     ssize_t readBytes = readSocket(fd_,inputBuffer_,zero);
-    LOG << inputBuffer_;
     if(readBytes < 0){ // 如果读取错误返回400.
         error_ = true;
         handleError(400,"Bad Request"); // handleError会关闭连接。
@@ -181,10 +180,7 @@ void HttpContext::handleRead() {
         }
     }
     if(processState_ == STATE_PARSE_HEADER){
-        LOG << inputBuffer_ << "\n" << "--------------------------------------------------------------------------------\n" ;
         HeaderState res = parseHeader();
-        LOG << res;
-        LOG << inputBuffer_ << "\n" << "--------------------------------------------------------------------------------\n" ;
         if(res == PARSE_HEADER_AGAIN){
             return;
         }else if(res == PARSE_HEADER_ERROR){
@@ -354,7 +350,6 @@ HeaderState HttpContext::parseHeader() {
     while(!inputBuffer_.empty()) {
         if (parseHeaderState_ == HEADER_LINE_READ) {
             if (!receiveOneLine()){
-                LOG << 1 << " " << lineEndPos_;
                 return PARSE_HEADER_AGAIN;
             } // 没收到一行不处理
             currentPosition_ = line_.find(':', currentPosition_);
