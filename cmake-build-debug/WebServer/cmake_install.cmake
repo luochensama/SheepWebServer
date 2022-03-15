@@ -1,4 +1,4 @@
-# Install script for directory: /home/luochensama/TinyWebServer/WebServer
+# Install script for directory: /home/luochensama/SheepWebServer/WebServer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

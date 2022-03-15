@@ -1,4 +1,4 @@
-# Install script for directory: /home/luochensama/TinyWebServer
+# Install script for directory: /home/luochensama/SheepWebServer
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/luochensama/TinyWebServer/cmake-build-debug/WebServer/cmake_install.cmake")
+  include("/home/luochensama/SheepWebServer/cmake-build-debug/WebServer/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/luochensama/TinyWebServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/luochensama/SheepWebServer/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
