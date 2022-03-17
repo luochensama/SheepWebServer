@@ -4,7 +4,7 @@
 
 ## 项目介绍
 
-本项目是使用C++编写的一个高并发Web服务器，支持HTTP1.1，支持解析GET,HEAD请求，可处理静态资源，支持长连接，实现了简易的异步日志，能够记录服务器运行状态。整体架构参照了陈硕的[muduo](https://github.com/chenshuo/muduo)和github上的高星项目[WebServer](https://github.com/linyacool/WebServer)。
+本项目是使用C++编写的一个高并发Web服务器，实现了HTTP协议，支持解析GET,HEAD请求，可处理静态资源，支持长连接，实现了简易的异步日志，能够记录服务器运行状态。整体架构参照了陈硕的[muduo](https://github.com/chenshuo/muduo)和github上的高星项目[WebServer](https://github.com/linyacool/WebServer)。
 
 ## 项目环境
 
