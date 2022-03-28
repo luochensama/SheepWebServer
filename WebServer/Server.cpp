@@ -47,7 +47,7 @@ void Server::handleRead() {
             }
             else break;
         }
-        if(fd > Epoll::getMaxFds()){
+        if(fd >= Epoll::getMaxFds()){
             ::close(fd);
             continue;
         }
